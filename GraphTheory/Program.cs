@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GraphTheory
 {
@@ -10,6 +6,15 @@ namespace GraphTheory
     {
         static void Main(string[] args)
         {
+            Graph graph = new Graph();
+            graph.AddEdge(1, 2);
+            graph.AddEdge(1, 3);
+            graph.AddEdge(2, 3);
+
+            graph.RemoveEdge(1, 2);
+            graph.RemoveEdge(1, 2);
+            graph.RemoveEdge(1, 3);
+            graph.RemoveEdge(2, 3);
         }
     }
 }
