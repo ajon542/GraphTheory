@@ -81,6 +81,45 @@ namespace GraphTheory
             }
         }
 
+        public void PrintPath(int v1, int v2)
+        {
+            if (!graph.ContainsKey(v1) || !graph.ContainsKey(v2))
+            {
+                // Can't find a path between vertices that don't exist.
+                return;
+            }
+
+            if (v1 == v2)
+            {
+                // No path if vertices are the same.
+                return;
+            }
+
+            Queue<int> vertices = new Queue<int>();
+            vertices.Enqueue(v1);
+
+            List<int> visited = new List<int>();
+
+            while(vertices.Count > 0)
+            {
+                int current = vertices.Dequeue();
+                visited.Add(current);
+                if(current == v2)
+                {
+                    Console.WriteLine("Found Path");
+                    return;
+                }
+
+                foreach(int vertex in graph[current])
+                {
+                    if(!visited.Contains(vertex))
+                    {
+                        vertices.Enqueue(vertex);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Gets the number of vertices in this graph.
         /// </summary>
@@ -109,9 +148,22 @@ namespace GraphTheory
             }
         }
 
+        /// <summary>
+        /// String representation of the graph.
+        /// </summary>
+        /// <returns>A string representation of the graph.</returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
+            sb.Append("{ ");
+            foreach (KeyValuePair<int, List<int>> edges in graph)
+            {
+                foreach(int vertex in edges.Value)
+                {
+                    sb.AppendFormat("({0}, {1}) ", edges.Key, vertex);
+                }
+            }
+            sb.Append("}");
             return sb.ToString();
         }
     }
