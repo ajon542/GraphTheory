@@ -81,43 +81,56 @@ namespace GraphTheory
             }
         }
 
-        public void PrintPath(int v1, int v2)
+        /// <summary>
+        /// Perform a breadth first search to determine if a path exists between
+        /// the supplied vertices.
+        /// </summary>
+        /// <param name="v1">The starting vertex.</param>
+        /// <param name="v2">The target vertex.</param>
+        /// <returns><c>true</c> if a path exists; otherwise, <c>false</c>.</returns>
+        public bool BreadthFirstPathExists(int v1, int v2)
         {
             if (!graph.ContainsKey(v1) || !graph.ContainsKey(v2))
             {
                 // Can't find a path between vertices that don't exist.
-                return;
+                return false;
             }
 
             if (v1 == v2)
             {
-                // No path if vertices are the same.
-                return;
+                // Path exists between the same vertices.
+                return true;
             }
 
+            List<int> visited = new List<int>();
             Queue<int> vertices = new Queue<int>();
             vertices.Enqueue(v1);
 
-            List<int> visited = new List<int>();
-
             while(vertices.Count > 0)
             {
+                // Keep track of the current vertex.
                 int current = vertices.Dequeue();
                 visited.Add(current);
+
+                // If we have reached the target vertex, a path exists.
                 if(current == v2)
                 {
-                    Console.WriteLine("Found Path");
-                    return;
+                    return true;
                 }
 
+                // Add the neighbouring vertices.
                 foreach(int vertex in graph[current])
                 {
-                    if(!visited.Contains(vertex))
+                    // No need to add the vertex if we have already visited, or
+                    // the vertex is already in the list of vertices to visit.
+                    if (!visited.Contains(vertex) && !vertices.Contains(vertex))
                     {
                         vertices.Enqueue(vertex);
                     }
                 }
             }
+
+            return false;
         }
 
         /// <summary>
