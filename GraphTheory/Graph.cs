@@ -134,6 +134,57 @@ namespace GraphTheory
         }
 
         /// <summary>
+        /// Perform a depth first search to determine if a path exists between
+        /// the supplied vertices.
+        /// </summary>
+        /// <param name="v1">The starting vertex.</param>
+        /// <param name="v2">The target vertex.</param>
+        /// <returns><c>true</c> if a path exists; otherwise, <c>false</c>.</returns>
+        public bool DepthFirstPathExists(int v1, int v2)
+        {
+            if (!graph.ContainsKey(v1) || !graph.ContainsKey(v2))
+            {
+                // Can't find a path between vertices that don't exist.
+                return false;
+            }
+
+            if (v1 == v2)
+            {
+                // Path exists between the same vertices.
+                return true;
+            }
+
+            List<int> visited = new List<int>();
+            Stack<int> vertices = new Stack<int>();
+            vertices.Push(v1);
+
+            while (vertices.Count > 0)
+            {
+                // Keep track of the current vertex.
+                int current = vertices.Pop();
+
+                // If we have reached the target vertex, a path exists.
+                if (current == v2)
+                {
+                    return true;
+                }
+
+                if (!visited.Contains(current))
+                {
+                    visited.Add(current);
+
+                    // Add the neighbouring vertices.
+                    foreach (int vertex in graph[current])
+                    {
+                        vertices.Push(vertex);
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Gets the number of vertices in this graph.
         /// </summary>
         public int VertexCount
