@@ -23,9 +23,12 @@ namespace GraphTheory
             graph.AddEdge(7, 6);
             graph.AddEdge(7, 8);
             graph.AddEdge(7, 9);
+            graph.AddEdge(11, 12);
 
             Console.WriteLine(graph.BreadthFirstPathExists(1, 9));
             Console.WriteLine(graph.DepthFirstPathExists(1, 9));
+            Console.WriteLine(graph.BreadthFirstPathExists(1, 12));
+            Console.WriteLine(graph.DepthFirstPathExists(1, 12));
 
             Console.ReadLine();
         }

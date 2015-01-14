@@ -106,26 +106,30 @@ namespace GraphTheory
             Queue<int> vertices = new Queue<int>();
             vertices.Enqueue(v1);
 
-            while(vertices.Count > 0)
+            while (vertices.Count > 0)
             {
                 // Keep track of the current vertex.
                 int current = vertices.Dequeue();
-                visited.Add(current);
 
                 // If we have reached the target vertex, a path exists.
-                if(current == v2)
+                if (current == v2)
                 {
                     return true;
                 }
 
-                // Add the neighbouring vertices.
-                foreach(int vertex in graph[current])
+                // No need to add the vertex if we have already visited it.
+                if (!visited.Contains(current))
                 {
-                    // No need to add the vertex if we have already visited, or
-                    // the vertex is already in the list of vertices to visit.
-                    if (!visited.Contains(vertex) && !vertices.Contains(vertex))
+                    visited.Add(current);
+
+                    // Add the neighbouring vertices.
+                    foreach (int vertex in graph[current])
                     {
-                        vertices.Enqueue(vertex);
+                        // No need to add the vertex if it is already in the list to process.
+                        if (!vertices.Contains(vertex))
+                        {
+                            vertices.Enqueue(vertex);
+                        }
                     }
                 }
             }
@@ -169,6 +173,7 @@ namespace GraphTheory
                     return true;
                 }
 
+                // No need to add the vertex if we have already visited it.
                 if (!visited.Contains(current))
                 {
                     visited.Add(current);
@@ -176,7 +181,11 @@ namespace GraphTheory
                     // Add the neighbouring vertices.
                     foreach (int vertex in graph[current])
                     {
-                        vertices.Push(vertex);
+                        // No need to add the vertex if it is already in the list to process.
+                        if (!vertices.Contains(vertex))
+                        {
+                            vertices.Push(vertex);
+                        }
                     }
                 }
             }
@@ -222,7 +231,7 @@ namespace GraphTheory
             sb.Append("{ ");
             foreach (KeyValuePair<int, List<int>> edges in graph)
             {
-                foreach(int vertex in edges.Value)
+                foreach (int vertex in edges.Value)
                 {
                     sb.AppendFormat("({0}, {1}) ", edges.Key, vertex);
                 }
