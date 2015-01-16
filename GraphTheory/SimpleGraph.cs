@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GraphTheory
 {
-    class Graph : IGraph
+    class SimpleGraph : IGraph
     {
         /// <summary>
         /// A simple graph data structure.
