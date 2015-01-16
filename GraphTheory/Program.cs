@@ -11,7 +11,6 @@ namespace GraphTheory
             graph.AddEdge(1, 3);
             graph.AddEdge(1, 4);
             graph.AddEdge(2, 3);
-            graph.AddEdge(2, 3);
             graph.AddEdge(3, 4);
             graph.AddEdge(3, 5);
             graph.AddEdge(4, 5);
@@ -29,6 +28,8 @@ namespace GraphTheory
             Console.WriteLine(graph.DepthFirstPathExists(1, 9));
             Console.WriteLine(graph.BreadthFirstPathExists(1, 12));
             Console.WriteLine(graph.DepthFirstPathExists(1, 12));
+
+            graph.Dijkstra(1, 9);
 
             Console.ReadLine();
         }

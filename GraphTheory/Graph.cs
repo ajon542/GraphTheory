@@ -194,6 +194,84 @@ namespace GraphTheory
         }
 
         /// <summary>
+        /// Find the shortest path between the given vertices.
+        /// </summary>
+        /// <param name="v1">The starting vertex.</param>
+        /// <param name="v2">The target vertex.</param>
+        /// <returns>A list of vertices in the shortest path. Null if no path exists.</returns>
+        public List<int> Dijkstra(int v1, int v2)
+        {
+            // Contains the mapping of vertex and shortest distance from the source vertex.
+            Dictionary<int, int> distance = new Dictionary<int, int>();
+
+            // Contains the mapping of previous verticies to obtain the shortest path.
+            Dictionary<int, int> previous = new Dictionary<int, int>();
+
+            // Contains the list of unvisited vertices.
+            List<int> unvisited = new List<int>();
+
+            // Initialize the data structures.
+            List<int> vertices = VertexList;
+            foreach (int vertex in vertices)
+            {
+                if (vertex != v1)
+                {
+                    distance[vertex] = int.MaxValue;
+                    previous[vertex] = -1;
+                }
+                unvisited.Add(vertex);
+            }
+            distance[v1] = 0;
+
+            // While there are still vertices to visit.
+            while (unvisited.Count > 0)
+            {
+                // Find and remove the vertex with the minimum distance from source so far.
+                int u = 0;
+                int min = int.MaxValue;
+                foreach (int vertex in unvisited)
+                {
+                    if (distance[vertex] <= min)
+                    {
+                        u = vertex;
+                        min = distance[vertex];
+                    }
+                }
+                unvisited.Remove(u);
+
+                // For each of the neighbouring vertices, update the distance from source
+                // and previous vertex. For this graph, we assume the edges all have equal weights.
+                foreach (int neighbour in graph[u])
+                {
+                    int alt = distance[u] + 1;
+                    if (alt < distance[neighbour])
+                    {
+                        distance[neighbour] = alt;
+                        previous[neighbour] = u;
+                    }
+                }
+            }
+
+            // Construct the list of vertices in the shortest path.
+            if (distance[v2] < 0)
+            {
+                // Could not find a path to the target vertex.
+                return null;
+            }
+
+            // Backtrack through the previous vertex list.
+            List<int> shortestPath = new List<int>();
+            int currentVertex = v2;
+            shortestPath.Add(currentVertex);
+            while (currentVertex != v1)
+            {
+                currentVertex = previous[currentVertex];
+                shortestPath.Add(currentVertex);
+            }
+            return shortestPath;
+        }
+
+        /// <summary>
         /// Gets the number of vertices in this graph.
         /// </summary>
         public int VertexCount
@@ -219,6 +297,14 @@ namespace GraphTheory
                 }
                 return edgeCount / 2;
             }
+        }
+
+        /// <summary>
+        /// Gets a list of the vertices in this graph.
+        /// </summary>
+        public List<int> VertexList
+        {
+            get { return new List<int>(graph.Keys); }
         }
 
         /// <summary>
