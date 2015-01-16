@@ -6,7 +6,7 @@ namespace GraphTheory
     {
         static void Main(string[] args)
         {
-            Graph graph = new Graph();
+            IGraph graph = new Graph();
             graph.AddEdge(1, 2);
             graph.AddEdge(1, 3);
             graph.AddEdge(1, 4);
@@ -24,12 +24,12 @@ namespace GraphTheory
             graph.AddEdge(7, 9);
             graph.AddEdge(11, 12);
 
-            Console.WriteLine(graph.BreadthFirstPathExists(1, 9));
-            Console.WriteLine(graph.DepthFirstPathExists(1, 9));
-            Console.WriteLine(graph.BreadthFirstPathExists(1, 12));
-            Console.WriteLine(graph.DepthFirstPathExists(1, 12));
+            Console.WriteLine(Graph.BreadthFirstPathExists(graph, 1, 9));
+            Console.WriteLine(Graph.DepthFirstPathExists(graph, 1, 9));
+            Console.WriteLine(Graph.BreadthFirstPathExists(graph, 1, 12));
+            Console.WriteLine(Graph.DepthFirstPathExists(graph, 1, 12));
 
-            graph.Dijkstra(1, 9);
+            Graph.Dijkstra(graph, 1, 9);
 
             Console.ReadLine();
         }

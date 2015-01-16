@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GraphTheory
 {
-    class Graph
+    class Graph : IGraph
     {
         /// <summary>
         /// A simple graph data structure.
@@ -82,15 +82,26 @@ namespace GraphTheory
         }
 
         /// <summary>
+        /// Determines if the given vertex exists in the graph.
+        /// </summary>
+        /// <param name="vertex">The vertex.</param>
+        /// <returns><c>true</c> if the graph contains the given vertex; otherwise, <c>false</c>.</returns>
+        public bool Contains(int vertex)
+        {
+            return graph.ContainsKey(vertex);
+        }
+
+        /// <summary>
         /// Perform a breadth first search to determine if a path exists between
         /// the supplied vertices.
         /// </summary>
+        /// <param name="graph">The graph to query.</param>
         /// <param name="v1">The starting vertex.</param>
         /// <param name="v2">The target vertex.</param>
         /// <returns><c>true</c> if a path exists; otherwise, <c>false</c>.</returns>
-        public bool BreadthFirstPathExists(int v1, int v2)
+        public static bool BreadthFirstPathExists(IGraph graph, int v1, int v2)
         {
-            if (!graph.ContainsKey(v1) || !graph.ContainsKey(v2))
+            if (!graph.Contains(v1) || !graph.Contains(v2))
             {
                 // Can't find a path between vertices that don't exist.
                 return false;
@@ -123,7 +134,8 @@ namespace GraphTheory
                     visited.Add(current);
 
                     // Add the neighbouring vertices.
-                    foreach (int vertex in graph[current])
+                    List<int> neighbours = graph.GetNeighbours(current);
+                    foreach (int vertex in neighbours)
                     {
                         // No need to add the vertex if it is already in the list to process.
                         if (!vertices.Contains(vertex))
@@ -141,12 +153,13 @@ namespace GraphTheory
         /// Perform a depth first search to determine if a path exists between
         /// the supplied vertices.
         /// </summary>
+        /// <param name="graph">The graph to query.</param>
         /// <param name="v1">The starting vertex.</param>
         /// <param name="v2">The target vertex.</param>
         /// <returns><c>true</c> if a path exists; otherwise, <c>false</c>.</returns>
-        public bool DepthFirstPathExists(int v1, int v2)
+        public static bool DepthFirstPathExists(IGraph graph, int v1, int v2)
         {
-            if (!graph.ContainsKey(v1) || !graph.ContainsKey(v2))
+            if (!graph.Contains(v1) || !graph.Contains(v2))
             {
                 // Can't find a path between vertices that don't exist.
                 return false;
@@ -179,7 +192,8 @@ namespace GraphTheory
                     visited.Add(current);
 
                     // Add the neighbouring vertices.
-                    foreach (int vertex in graph[current])
+                    List<int> neighbours = graph.GetNeighbours(current);
+                    foreach (int vertex in neighbours)
                     {
                         // No need to add the vertex if it is already in the list to process.
                         if (!vertices.Contains(vertex))
@@ -196,10 +210,11 @@ namespace GraphTheory
         /// <summary>
         /// Find the shortest path between the given vertices.
         /// </summary>
+        /// <param name="graph">The graph to query.</param>
         /// <param name="v1">The starting vertex.</param>
         /// <param name="v2">The target vertex.</param>
         /// <returns>A list of vertices in the shortest path. Null if no path exists.</returns>
-        public List<int> Dijkstra(int v1, int v2)
+        public static List<int> Dijkstra(IGraph graph, int v1, int v2)
         {
             // Contains the mapping of vertex and shortest distance from the source vertex.
             Dictionary<int, int> distance = new Dictionary<int, int>();
@@ -211,7 +226,7 @@ namespace GraphTheory
             List<int> unvisited = new List<int>();
 
             // Initialize the data structures.
-            List<int> vertices = VertexList;
+            List<int> vertices = graph.VertexList;
             foreach (int vertex in vertices)
             {
                 if (vertex != v1)
@@ -241,7 +256,8 @@ namespace GraphTheory
 
                 // For each of the neighbouring vertices, update the distance from source
                 // and previous vertex. For this graph, we assume the edges all have equal weights.
-                foreach (int neighbour in graph[u])
+                List<int> neighbours = graph.GetNeighbours(u);
+                foreach (int neighbour in neighbours)
                 {
                     int alt = distance[u] + 1;
                     if (alt < distance[neighbour])
@@ -305,6 +321,16 @@ namespace GraphTheory
         public List<int> VertexList
         {
             get { return new List<int>(graph.Keys); }
+        }
+
+        public List<int> GetNeighbours(int vertex)
+        {
+            if (!graph.ContainsKey(vertex))
+            {
+                throw new ArgumentNullException("vertex");
+            }
+
+            return new List<int>(graph[vertex]);
         }
 
         /// <summary>
