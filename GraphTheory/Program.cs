@@ -6,7 +6,7 @@ namespace GraphTheory
     {
         static void Main(string[] args)
         {
-            IGraph graph = new Graph();
+            IGraph graph = new SimpleGraph();
             graph.AddEdge(1, 2);
             graph.AddEdge(1, 3);
             graph.AddEdge(1, 4);
