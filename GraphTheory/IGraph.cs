@@ -12,5 +12,6 @@ namespace GraphTheory
         void RemoveEdge(int v1, int v2);
         bool Contains(int vertex);
         List<int> GetNeighbours(int vertex);
+        int GetDegree(int vertex);
     }
 }

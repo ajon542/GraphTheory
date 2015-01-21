@@ -127,6 +127,11 @@ namespace GraphTheory
             get { return new List<int>(graph.Keys); }
         }
 
+        /// <summary>
+        /// Get the neighbouring vertices.
+        /// </summary>
+        /// <param name="vertex">The vertex.</param>
+        /// <returns>A list of the neighbouring vertices.</returns>
         public List<int> GetNeighbours(int vertex)
         {
             if (!graph.ContainsKey(vertex))
@@ -135,6 +140,21 @@ namespace GraphTheory
             }
 
             return new List<int>(graph[vertex]);
+        }
+
+        /// <summary>
+        /// Gets the number of edges incident to this vertex.
+        /// </summary>
+        /// <param name="vertex">The vertex.</param>
+        /// <returns>The number of edges incident to this vertex.</returns>
+        public int GetDegree(int vertex)
+        {
+            if (!graph.ContainsKey(vertex))
+            {
+                throw new ArgumentNullException("vertex");
+            }
+
+            return graph[vertex].Count;
         }
 
         /// <summary>
