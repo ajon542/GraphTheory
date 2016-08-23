@@ -6,7 +6,7 @@ namespace GraphTheory
     {
         static void Main(string[] args)
         {
-            IGraph graph = new SimpleGraph();
+            /*IGraph graph = new SimpleGraph();
             graph.AddEdge(1, 2);
             graph.AddEdge(1, 3);
             graph.AddEdge(1, 4);
@@ -29,7 +29,11 @@ namespace GraphTheory
             Console.WriteLine(Graph.BreadthFirstPathExists(graph, 1, 12));
             Console.WriteLine(Graph.DepthFirstPathExists(graph, 1, 12));
 
-            Graph.Dijkstra(graph, 1, 9);
+            Graph.Dijkstra(graph, 1, 9);*/
+
+            MapReader mapReader = new MapReader();
+            mapReader.ReadMapFile(@"C:\development\GitHub\GraphTheory\GraphTheory\map.txt");
+
 
             Console.ReadLine();
         }
