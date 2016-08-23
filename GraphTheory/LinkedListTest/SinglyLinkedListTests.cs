@@ -279,5 +279,46 @@ namespace LinkedListTest
             Assert.AreEqual(2, SinglyLinkedList.FindCycle(head));
         }
         #endregion
+
+        #region Reverse Tests
+        [TestMethod]
+        public void TestMethod22()
+        {
+            SNode head = new SNode { data = 1 };
+
+            head = SinglyLinkedList.Reverse(head);
+
+            Assert.AreEqual(1, head.data);
+            Assert.IsNull(head.next);
+        }
+
+        [TestMethod]
+        public void TestMethod23()
+        {
+            SNode head = new SNode { data = 1 };
+            head = SinglyLinkedList.AddTail(head, 2);
+
+            head = SinglyLinkedList.Reverse(head);
+
+            Assert.AreEqual(2, head.data);
+            Assert.AreEqual(1, head.next.data);
+            Assert.IsNull(head.next.next);
+        }
+
+        [TestMethod]
+        public void TestMethod24()
+        {
+            SNode head = new SNode { data = 1 };
+            head = SinglyLinkedList.AddTail(head, 2);
+            head = SinglyLinkedList.AddTail(head, 3);
+
+            head = SinglyLinkedList.Reverse(head);
+
+            Assert.AreEqual(3, head.data);
+            Assert.AreEqual(2, head.next.data);
+            Assert.AreEqual(1, head.next.next.data);
+            Assert.IsNull(head.next.next.next);
+        }
+        #endregion
     }
 }

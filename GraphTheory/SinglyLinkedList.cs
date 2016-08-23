@@ -166,5 +166,22 @@ namespace GraphTheory
             // Reached end of list without cycle.
             return cycleSize;
         }
+
+        public static SNode Reverse(SNode head)
+        {
+            SNode c = head;
+            SNode n = head;
+            SNode p = null;
+
+            while (c != null)
+            {
+                n = n.next;
+                c.next = p;
+                p = c;
+                c = n;
+            }
+
+            return p;
+        }
     }
 }
