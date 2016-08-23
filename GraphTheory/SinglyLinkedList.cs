@@ -169,19 +169,19 @@ namespace GraphTheory
 
         public static SNode Reverse(SNode head)
         {
-            SNode c = head;
-            SNode n = head;
-            SNode p = null;
+            SNode curr = head;
+            SNode next = head;
+            SNode prev = null;
 
-            while (c != null)
+            while (curr != null)
             {
-                n = n.next;
-                c.next = p;
-                p = c;
-                c = n;
+                next = next.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
             }
 
-            return p;
+            return prev;
         }
     }
 }
