@@ -1,20 +1,44 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphTheory", "GraphTheory.csproj", "{F4924D9D-F84C-417C-9805-D7409D1762F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedListTest", "LinkedListTest\LinkedListTest.csproj", "{6EF7D4CB-5670-4FEC-8665-E487E4262C12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F4924D9D-F84C-417C-9805-D7409D1762F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F4924D9D-F84C-417C-9805-D7409D1762F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4924D9D-F84C-417C-9805-D7409D1762F6}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F4924D9D-F84C-417C-9805-D7409D1762F6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F4924D9D-F84C-417C-9805-D7409D1762F6}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{F4924D9D-F84C-417C-9805-D7409D1762F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4924D9D-F84C-417C-9805-D7409D1762F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4924D9D-F84C-417C-9805-D7409D1762F6}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F4924D9D-F84C-417C-9805-D7409D1762F6}.Release|x64.ActiveCfg = Release|Any CPU
+		{F4924D9D-F84C-417C-9805-D7409D1762F6}.Release|x86.ActiveCfg = Release|Any CPU
+		{6EF7D4CB-5670-4FEC-8665-E487E4262C12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EF7D4CB-5670-4FEC-8665-E487E4262C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EF7D4CB-5670-4FEC-8665-E487E4262C12}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6EF7D4CB-5670-4FEC-8665-E487E4262C12}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6EF7D4CB-5670-4FEC-8665-E487E4262C12}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6EF7D4CB-5670-4FEC-8665-E487E4262C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EF7D4CB-5670-4FEC-8665-E487E4262C12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EF7D4CB-5670-4FEC-8665-E487E4262C12}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6EF7D4CB-5670-4FEC-8665-E487E4262C12}.Release|x64.ActiveCfg = Release|Any CPU
+		{6EF7D4CB-5670-4FEC-8665-E487E4262C12}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
