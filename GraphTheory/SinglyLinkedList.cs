@@ -104,5 +104,67 @@ namespace GraphTheory
 
             return head;
         }
+
+        public static int CycleSize(SNode head, SNode curr)
+        {
+            SNode a = head;
+            SNode b = curr;
+
+            // Find the cycle start index.
+            int cycleStartIndex = 0;
+            while (a != b)
+            {
+                a = a.next;
+                b = b.next;
+                cycleStartIndex++;
+            }
+
+            // Count the cycle size.
+            a = a.next;
+            int cycleSize = 1;
+            while (a != b)
+            {
+                a = a.next;
+                cycleSize++;
+            }
+            Console.WriteLine("cycleStartIndex={0}, cycleSize={1}", cycleStartIndex, cycleSize);
+            return cycleSize;
+        }
+
+        public static int FindCycle(SNode head)
+        {
+            int cycleSize = -1;
+
+            if (head == null || head.next == null)
+            {
+                return cycleSize;
+            }
+
+            // "a" starts at index 0, "b" starts at index 2.
+            SNode a = head;
+            SNode b = head.next.next;
+
+            while (b != null)
+            {
+                // Update "a" by one.
+                a = a.next;
+
+                if (a == b)
+                {
+                    // Found cycle.
+                    cycleSize = CycleSize(head, b);
+                    return cycleSize;
+                }
+
+                // Update "b" by two.
+                b = b.next;
+                if (b != null)
+                {
+                    b = b.next;
+                }
+            }
+            // Reached end of list without cycle.
+            return cycleSize;
+        }
     }
 }
