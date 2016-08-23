@@ -72,5 +72,37 @@ namespace GraphTheory
 
             return head;
         }
+
+        public static SNode Delete(SNode head, int data)
+        {
+            SNode curr = head;
+            SNode prev = null;
+            SNode toDelete = null;
+
+            // Delete all nodes with the given data.
+            while (curr != null)
+            {
+                if (curr.data == data)
+                {
+                    toDelete = curr;
+                    if (prev == null)
+                    {
+                        head = curr.next;
+                    }
+                    else
+                    {
+                        prev.next = curr.next;
+                    }
+                }
+                else
+                {
+                    prev = curr;
+                }
+                curr = curr.next;
+                toDelete = null;
+            }
+
+            return head;
+        }
     }
 }
