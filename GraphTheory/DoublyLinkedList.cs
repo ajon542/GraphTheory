@@ -27,5 +27,30 @@ namespace GraphTheory
 
             return newNode;
         }
+
+        public static DNode AddTail(DNode head, int data)
+        {
+            DNode newNode = new DNode { data = data };
+
+            // List doesn't exist, just return the new node.
+            if (head == null)
+            {
+                return newNode;
+            }
+
+            DNode tmp = head;
+
+            // Iterate to end of list.
+            while (tmp.next != null)
+            {
+                tmp = tmp.next;
+            }
+
+            // Add the new node.
+            tmp.next = newNode;
+            newNode.prev = tmp;
+
+            return head;
+        }
     }
 }
