@@ -52,5 +52,86 @@ namespace GraphTheory
 
             return head;
         }
+
+        public static DNode Insert(DNode head, int data, int position)
+        {
+            // Adding position 0 is the same as AddHead.
+            if (position == 0)
+            {
+                return AddHead(head, data);
+            }
+
+            int index = 0;
+            DNode curr = head;
+
+            while (curr.next != null && index < position)
+            {
+                curr = curr.next;
+                index++;
+            }
+
+            // Say we have two items in the list at index 0 and 1,
+            // then we try to insert an item a index 2. We could do a couple
+            // of things.
+            // 1. Fail and say that position does not exist, can't insert.
+            // 2. Insert that item at the end of the list.
+
+            if (index != position)
+            {
+                InsertAfter(curr, data);
+            }
+            else
+            {
+                // We are at the correct position here, need to append rest of
+                // list to the new node.
+                InsertBefore(curr, data);
+            }
+
+            return head;
+        }
+
+        public static void InsertAfter(DNode node, int data)
+        {
+            // There are two cases we need to handle here.
+            // 1. Adding the new node after the last node in the list.
+            // 2. Adding the new node in the middle of the list.
+            DNode newNode = new DNode { data = data };
+
+            if (node.next == null)
+            {
+                // Add node to end of list.
+                node.next = newNode;
+                newNode.prev = node;
+                return;
+            }
+
+            // Add node in middle of list.
+            newNode.next = node.next;
+            newNode.prev = node;
+            node.next.prev = newNode;
+            node.next = newNode;
+        }
+
+        public static void InsertBefore(DNode node, int data)
+        {
+            // There are two cases we need to handle here.
+            // 1. Adding the new node before the first node in the list.
+            // 2. Adding the new node in the middle of the list.
+            DNode newNode = new DNode { data = data };
+
+            if (node.prev == null)
+            {
+                // Add node to start of list.
+                node.prev = newNode;
+                newNode.next = node;
+                return;
+            }
+
+            // Add node in middle of list.
+            newNode.prev = node.prev;
+            newNode.next = node;
+            node.prev.next = newNode;
+            node.prev = newNode;
+        }
     }
 }
