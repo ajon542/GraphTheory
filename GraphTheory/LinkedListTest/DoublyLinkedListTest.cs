@@ -173,5 +173,38 @@ namespace LinkedListTest
             Assert.IsNull(head.next.next.next);
         }
         #endregion
+
+        #region Delete Tests
+        [TestMethod]
+        public void TestMethod12()
+        {
+            DNode head = null;
+            head = DoublyLinkedList.AddTail(head, 1);
+            head = DoublyLinkedList.DeleteFirstOf(head, 1);
+            Assert.IsNull(head);
+        }
+
+        [TestMethod]
+        public void TestMethod13()
+        {
+            DNode head = null;
+            head = DoublyLinkedList.AddTail(head, 1);
+            head = DoublyLinkedList.AddTail(head, 2);
+            head = DoublyLinkedList.DeleteFirstOf(head, 1);
+            Assert.AreEqual(2, head.data);
+            Assert.IsNull(head.next);
+        }
+
+        [TestMethod]
+        public void TestMethod14()
+        {
+            DNode head = null;
+            head = DoublyLinkedList.AddTail(head, 1);
+            head = DoublyLinkedList.AddTail(head, 2);
+            head = DoublyLinkedList.DeleteFirstOf(head, 2);
+            Assert.AreEqual(1, head.data);
+            Assert.IsNull(head.next);
+        }
+        #endregion
     }
 }

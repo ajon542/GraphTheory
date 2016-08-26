@@ -133,5 +133,59 @@ namespace GraphTheory
             node.prev.next = newNode;
             node.prev = newNode;
         }
+
+        public static DNode DeleteFirstOf(DNode head, int data)
+        {
+            DNode curr = head;
+
+            while (curr != null)
+            {
+                // The current node data matches.
+                if (curr.data == data)
+                {
+                    // Head node.
+                    if (curr.prev == null)
+                    {
+                        head = curr.next;
+                        
+                        // The node may have been the last node in the list, if not:
+                        if (head != null)
+                        {
+                            // Remove reference to previous node.
+                            head.prev = null;
+                        }
+                    }
+                    // Tail node.
+                    else if (curr.next == null)
+                    {
+                        // Remove the previous node's reference to the current node.
+                        curr.prev.next = null;
+                    }
+                    // Middle node.
+                    else
+                    {
+                        // Unlink the node.
+                        curr.prev.next = curr.next;
+                        curr.next.prev = curr.prev;
+                    }
+
+                    // Remove the final reference to the node.
+                    curr = null;
+                }
+                else
+                {
+                    curr = curr.next;
+                }
+            }
+
+            return head;
+        }
+
+        public static void Delete(ref DNode node)
+        {
+            node.next.prev = node.prev;
+            node.prev.next = node.next;
+            node = null;
+        }
     }
 }
