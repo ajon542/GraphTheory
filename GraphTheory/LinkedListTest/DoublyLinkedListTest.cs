@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using GraphTheory;
@@ -191,8 +192,8 @@ namespace LinkedListTest
             head = DoublyLinkedList.AddTail(head, 1);
             head = DoublyLinkedList.AddTail(head, 2);
             head = DoublyLinkedList.DeleteFirstOf(head, 1);
-            Assert.AreEqual(2, head.data);
-            Assert.IsNull(head.next);
+
+            ValidateList(head, new List<int> { 2 });
         }
 
         [TestMethod]
@@ -202,9 +203,92 @@ namespace LinkedListTest
             head = DoublyLinkedList.AddTail(head, 1);
             head = DoublyLinkedList.AddTail(head, 2);
             head = DoublyLinkedList.DeleteFirstOf(head, 2);
-            Assert.AreEqual(1, head.data);
-            Assert.IsNull(head.next);
+
+            ValidateList(head, new List<int> { 1 });
+        }
+
+        [TestMethod]
+        public void TestMethod15()
+        {
+            DNode head = null;
+            head = DoublyLinkedList.AddTail(head, 1);
+            head = DoublyLinkedList.AddTail(head, 2);
+            head = DoublyLinkedList.AddTail(head, 3);
+            head = DoublyLinkedList.AddTail(head, 4);
+            head = DoublyLinkedList.AddTail(head, 5);
+            head = DoublyLinkedList.DeleteFirstOf(head, 5);
+
+            ValidateList(head, new List<int> { 1, 2, 3, 4 });
+        }
+
+        [TestMethod]
+        public void TestMethod16()
+        {
+            DNode head = null;
+            head = DoublyLinkedList.AddTail(head, 1);
+            head = DoublyLinkedList.AddTail(head, 2);
+            head = DoublyLinkedList.AddTail(head, 3);
+            head = DoublyLinkedList.AddTail(head, 4);
+            head = DoublyLinkedList.AddTail(head, 5);
+            head = DoublyLinkedList.DeleteFirstOf(head, 5);
+            head = DoublyLinkedList.DeleteFirstOf(head, 4);
+            head = DoublyLinkedList.DeleteFirstOf(head, 2);
+            head = DoublyLinkedList.DeleteFirstOf(head, 3);
+            head = DoublyLinkedList.DeleteFirstOf(head, 1);
+
+            ValidateList(head, new List<int> ());
         }
         #endregion
+
+        private void ValidateList(DNode head, List<int> expected)
+        {
+            int count = 0;
+            DNode curr = head;
+
+            // Validate count of items in each list is equal.
+            while (curr != null)
+            {
+                count++;
+                curr = curr.next;
+            }
+
+            // Ensure the lists contain the same number of elements.
+            Assert.AreEqual(count, expected.Count);
+
+            curr = head;
+            count = 0;
+            while (curr != null)
+            {
+                // Head node.
+                if (count == 0)
+                {
+                    Assert.IsNull(curr.prev);
+
+                    // If the head node, is not also the tail node.
+                    if (expected.Count > 1)
+                    {
+                        Assert.AreEqual(expected[count + 1], curr.next.data);
+                    }
+                }
+                // Tail node.
+                else if (count == expected.Count - 1)
+                {
+                    Assert.IsNull(curr.next);
+                }
+                // Middle node.
+                else
+                {
+                    Assert.AreEqual(expected[count + 1], curr.next.data);
+                    Assert.AreEqual(expected[count - 1], curr.prev.data);
+                }
+
+                // Ensure data for the current node is valid.
+                Assert.AreEqual(expected[count], curr.data);
+
+                count++;
+                curr = curr.next;
+            }
+
+        }
     }
 }
