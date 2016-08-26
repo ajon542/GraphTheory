@@ -41,14 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DoublyLinkedList.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="MapReader.cs" />
     <Compile Include="SimpleGraph.cs" />
     <Compile Include="IGraph.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SinglyLinkedList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
